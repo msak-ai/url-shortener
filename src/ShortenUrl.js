@@ -1,11 +1,16 @@
 import React from "react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useGlobalState } from "./Context";
 
 const ShortenUrl = () => {
-    const [url, setUrl] = useState('');
+    const {
+        url,
+        setUrl,
+        setShorten
+    } = useGlobalState();
     const nav = useNavigate();
-    const [shorten, setShorten] = useState('')
+    // const [url, setUrl] = useState('');
+    // const [shorten, setShorten] = useState('');
     const handleChange = ({ target }) => {
         setUrl(target.value)
     }
@@ -25,12 +30,12 @@ const ShortenUrl = () => {
             if (request.ok) {
                 const json = await request.json()
                 setShorten(`https://${json['shortUrl']}`)
-                nav('/copy', {url: shorten});
+                nav('/copy');
             }
         } catch (error) {
             console.log(error)
         }
-        setUrl('')
+
     }
 
     return (

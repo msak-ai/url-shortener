@@ -1,13 +1,16 @@
 import React from "react";
-
-const CopyShortenUrl = (props) => {
-
+import { useGlobalState } from "./Context";
+const CopyShortenUrl = () => {
+    const {
+        url,
+        shorten,
+    } = useGlobalState();
 
     return (
         <main>
             <h1 className='logo' style={{ textAlign: 'start' }}>Your shortened URL</h1>
             <p>Copy the shortened link and share it in messages, texts, posts, websites and other locations.</p>
-            <Comp value={props.shorten} url={props.url} />
+            <Comp value={shorten} url={url} />
         </main>
     )
 }
